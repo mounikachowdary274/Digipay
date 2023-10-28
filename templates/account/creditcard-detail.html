@@ -1,0 +1,76 @@
+{% extends 'partials/dashbord_base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .detail{
+           
+            font-size: 20px;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        .para{
+           
+            margin-top: 20px;
+        }
+        h5{
+            text-decoration: underline;
+        }
+        p{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .hyperlink{
+           
+            margin-top: 20px;
+            display: flex;
+            margin-left: 30px;
+            
+        }
+        .with{
+            margin-left: 30px;
+        }
+        .hyperlink a{
+            text-decoration: underline;
+            color: forestgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail">
+    <h5>Here Are The Your Card Details</h5>
+            <p class="para"><b>ACCOUNT-NUMBER :</b> {{account.account_number}}</p>
+            <p><b>ACCOUNT-ID :</b> {{account.account_id}}</p>
+            <p><b>FULL-NAME :</b> {{kyc.full_name}}</p>
+            <p><b>GENDER :</b> {{kyc.gender}}</p>
+            <p><b>IDENTITY-TYPE :</b> {{kyc.identity_type}}</p>
+            <p><b>DOB : </b>{{kyc.date_of_birth}}</p>
+            <p><b>ACCOUNT-BALANCE :</b> {{account.account_balance}}</p>
+            <p><b>ACCOUNT-STATUS :</b> {{account.status}}</p>
+            <p><b>CARD-NAME :</b> {{credit.name}}</p>
+            <p><b>CARD-NUMBER :</b> {{credit.number}}</p>
+            <p><b>CARD-EXPIRY-MONTH :</b> {{credit.month}}</p>
+            <p><b>CARD-EXPIRY-YEAR :</b> {{credit.year}}</p>
+            <p><b>CARD-TYPE : </b>{{credit.card_type}}</p>
+            <p><b>CARD-STATUS :</b> {{credit.card_status}}</p>
+            <p><b>CARD-CVV :</b> {{credit.cvv}}</p>
+            <p><b>CARD-BALANCE:</b>{{credit.card_amount}}</p>
+            <div class="hyperlink">
+                <div class="one">
+            <a href="{%url 'transactions:credit_card_bill' credit.card_id %}"><b>PAY-BILL</b></a> 
+        </div>
+        <div class="two">
+            <a href="{%url 'transactions:withdraw_amount_card' credit.card_id %}" class="with"><b>WITH-DRAW</b></a>
+        </div>
+        <a href="{%url 'transactions:delete_card' credit.card_id%}">DELETE</a>
+           </div> 
+        </div>
+  
+
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,106 @@
+{% extends 'partials/dashbord_base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main{
+      margin-left: 400px;
+      margin-top: 100px;
+    }
+    h4{
+      text-decoration: underline;
+    }
+    .inp{
+      display: flex;
+      justify-content: space-between;
+      text-decoration: underline;
+      
+    }
+    table{
+      margin-top: 20px;
+     
+      
+    }
+    .transfer{
+      color: green;
+      border-color: green;
+    }
+    .received{
+      color: blue;
+      border-color: blue;
+    }
+    .in1{
+      color: green;
+    }
+    .in2{
+      color: darkgoldenrod;
+    }
+  </style>
+</head>
+<body>
+    <form action="" method="POST">
+        {%csrf_token%}
+  <div class="main">
+  <div class="container">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-body">
+                  <p>Hi!! {{account.user}}</p>
+                  <p><b>Rs {{account.account_balance}}</b></p>
+                  <p>{{account.account_number}}</p>
+                  <div class="inp">
+                 <input class="in1" type="submit" value="completed" name="completed">
+                 <input class="in2" type="submit" value="request_sent" name="request_sent">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+  
+  <h4><b>Recent Transactions</b></h4>
+  <table  border="1" cellspacing="3" cellpadding="5"  style="text-align: center;" >
+    <tr>
+      <th>NAME</th>
+      <th>AMOUNT</th>
+      <th>DATE</th>
+      <th>TRANSACTION_STATUS</th>
+      <th>ACTION</th>
+    </tr>
+    {% if query1 %}
+    {%for data in transaction%}
+    <tr>
+      <td>{{data.receiver}}</td>
+      <td>{{data.user}}</td>
+      <td>{{data.amount}}</td>
+      <td>{{data.date}}</td>
+      <td>{{data.status}}</td>
+      <td><a href="{%url 'transactions:send_confirmation' data.receiver.account.account_number data.transaction_id%}">Send</a></td>
+    </tr>
+    {%endfor%}
+    {%endif%}
+    {%if query2%}
+    {%for data in transaction%}
+    <tr>
+    <td>{{data.user}}</td>
+    <td>{{data.amount}}</td>
+    <td>{{data.date}}</td>
+    <td>{{data.status}}</td>
+      <td><a href="{%url 'transactions:transaction_detail' data.transaction_id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+      </svg></a></td> 
+    </tr>
+   {%endfor%}
+   {%endif%}
+  </table>
+</div>
+</form>
+</body>
+</html>
+{% endblock content %}

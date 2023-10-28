@@ -1,0 +1,212 @@
+{% extends 'partials/dashbord_base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main{
+      margin-left: 400px;
+      margin-top: 100px;
+    }
+    h4{
+      text-decoration: underline;
+    }
+    .inp{
+      display: flex;
+      
+    }
+    table{
+      margin-top: 20px;
+     
+      
+    }
+    .transfer{
+      color: green;
+      border-color: green;
+    }
+    .received{
+      color: blue;
+      border-color: blue;
+    }
+    .AddCards{
+      color: yellow;
+      border-color: green;
+    }
+   
+  .userInput p{
+   font-size: 15px;
+   width: 130px;
+    
+  }
+  .cr{
+    margin-left: 30px;
+  }
+  h5{
+    text-decoration: underline;
+  }
+  .detail{
+    margin-left: 30px;
+  }
+  .button{
+    color: blue;
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  </style>
+</head>
+<body>
+
+  <div class="main">
+
+  <div class="container">
+    <div class="jumbotron">
+        <div class="row">
+          
+            <div class="col-md-4">
+             
+                <div class="card card-body">
+                  <p>Hi!! {{account.user}}</p>
+                  <p><b>Rs {{account.account_balance}}</b></p>
+                  <p>{{account.account_number}}</p>
+                  <div class="inp">
+                  <input type="submit" value="Transfer" class="transfer">
+                  <input type="submit" value="Receive" class="received">
+                  <input type="submit" value="AddCards" class="AddCards">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+ 
+
+  <div class="cr">
+    <h5>LINK-CARDS</h5>
+    <a href="javascript:void(0)" class="transferMod active" data-bs-toggle="modal" data-bs-target="#transferMod"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
+      <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2Zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672Z"/>
+      <path d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5Z"/>
+    </svg></a>
+  </div> <br>
+  <div class="detail">
+  <h5>CARD-DETAILS</h5> <br>
+  <div class="row">
+    {%for data in credit_card%}
+    <div class="col-md-4">
+     
+        <div class="card card-body">
+         <p>{{data.name}}</p>
+          <p>{{data.card_type}}</p>
+          <p>{{data.number}}</p>
+          <p>{{data.month}}</p>
+          <p>{{data.year}}</p>
+          <p>{{data.cvv}}</p>
+           <a class="button" href="{%url 'transactions:credit_card_detail' data.number account.account_number %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb" viewBox="0 0 16 16">
+            <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.632 2.632 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z"/>
+          </svg> Card-Details </a>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+</div>
+ 
+<br>
+  <br>
+  <h4><b>Recent Transactions</b></h4>
+  <table  border="1" cellspacing="3" cellpadding="5"  style="text-align: center;" >
+    <tr>
+      <th>NAME</th>
+      <th>AMOUNT</th>
+      <th>DATE</th>
+      <th>TRANSACTION_STATUS</th>
+      <th>ACTION</th>
+    </tr>
+    {%for data in transaction%}
+    <tr>
+      <td>{{data.user}}</td>
+      <td>{{data.amount}}</td>
+      <td>{{data.date}}</td>
+      <td>{{data.status}}</td>
+      <td><a href="{%url 'transactions:transaction_detail' data.transaction_id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+      </svg></a></td>
+    </tr>
+    {%endfor%} 
+  </table>
+  <br>
+</div>
+ <!-- Transfer Popup start -->
+ <div class="transfer-popup">
+  <div class="container-fruid">
+      <div class="row">
+          <div class="col-lg-6">
+              <div class="modal fade" id="transferMod" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                      <ul class="nav nav-tabs d-none" role="tablist">
+                          <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="transfer-tab" data-bs-toggle="tab"
+                                  data-bs-target="#transfer" type="button" role="tab" aria-controls="transfer"
+                                  aria-selected="true">transfer</button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="success-tab" data-bs-toggle="tab"
+                                  data-bs-target="#success" type="button" role="tab" aria-controls="success"
+                                  aria-selected="false">Confirm</button>
+                          </li>
+                      </ul>
+                      <div class="tab-content">
+                          <div class="tab-pane fade show active" id="transfer" role="tabpanel" aria-labelledby="transfer-tab">
+                              <div class="modal-content">
+                                  <div class="modal-header mb-60 justify-content-between">
+                                      <a href="javascript:void(0)">
+                                          <i class="icon-a-left-arrow"></i>
+                                          Back
+                                      </a>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                                  </div>
+                                  <div class="main-content">
+                                      <h4>Add Card</h4>
+                                      <form  method="POST">
+                                          {% csrf_token %}
+                                          <div class="userInput">
+                                               <!-- <p>user{{form.User}}</p><br>
+                                              <p>Card-Name{{form.name}}</p><br>
+                                              <p>Card-Number{{form.number}}</p>
+                                              <p>Card-Month{{form.month}}</p>
+                                              <p>Card-Year{{form.year}}</p>
+                                              <p>CVV{{form.cvv}}</p> -->
+                                              {{form.as_p}}
+                                   
+                                          </div>
+                                          <button type="submit" class="mt-60 confirm">ADD-CARD</button>
+                                          
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="tab-pane fade" id="success" role="tabpanel" aria-labelledby="success-tab">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="btn-close d-md-none d-block" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                                  </div>
+                                  <div class="main-content text-center pt-120 pb-120">
+                                      <h3>Success</h3>
+                                      <p>Successfully Added Card.</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Transfer Popup start -->
+</body>
+</html>
+{% endblock content %}

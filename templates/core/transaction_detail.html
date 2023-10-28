@@ -1,0 +1,68 @@
+{% extends 'partials/dashbord_base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .transaction_detail{
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        .two img{
+            height: 120px;
+            width: 100px;
+            margin-left: 50px;
+            margin-top: -10px;
+            
+            
+        }
+        .ot{
+            display: flex;
+            
+        }
+        h4{
+            text-decoration: underline;
+        }
+        .rec{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="transaction_detail">
+        <div class="ot">
+        <div class="one">
+        <p>{{account.user}}</p>
+        <p>{{account.account_number}}</p>
+        <p>{{account.account_id}}</p>
+    </div>
+    <div class="two">
+        <img src={{kyc.image.url}} alt="">
+    </div>
+</div>
+
+        <h4 class="rec">Receiver Details</h4>
+        <p>{{receiver}}</p>
+        <p>{{transaction.amount}}</p>
+        <p>{{receiver.account.account_number}}</p>
+        <p>{{receiver.account.account_id}}</p> <br>
+        <h4>Kyc Details</h4>
+        <p>{{kyc.gender}}</p>
+        <p>{{kyc_id}}</p>
+        <p>{{kyc.date_of_birth}}</p> <br>
+        <h4>Transaction-Details</h4>
+        <p>{{transaction.transaction_id}}</p>
+        <p>{{transaction.description}}</p>
+        <p>{{transaction_amount}}</p>
+        <p>{{transaction.date}}</p>
+        <p>{{transaction.status}}</p>
+        <p>{{transaction.transaction_type}}</p>
+    </div>
+    
+</body>
+</html>
+{% endblock content %}
